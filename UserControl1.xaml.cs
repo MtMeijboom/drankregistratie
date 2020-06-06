@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace drankregistratie
+namespace Drankregistratie3
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml
@@ -24,16 +24,43 @@ namespace drankregistratie
         public UserControl1()
         {
             InitializeComponent();
+            drankenDG.ItemsSource = db.drankens.ToList();
         }
 
-        private void drankeninvoer_Click(object sender, RoutedEventArgs e)
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            dranken deDrank = new dranken();
-            deDrank.Naam = dranknaam.Text;
-            deDrank.Soort = dranksoort.Text;
-            deDrank.Prijs = Convert.ToDecimal(drankprijs.Text);
-            db.drankens.InsertOnSubmit(deDrank);
-            db.SubmitChanges();
+            var item = (dranken)drankenDG.SelectedItem;
+            drankjesDG.Children.Clear();
+            Dranken ep = new Dranken(item, db);
+            drankjesDG.Children.Add(ep);
+        }
+
+        private void btnSave1_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (dranken)drankenDG.SelectedItem;
+            drankjesDG.Children.Clear();
+            Dranken eps = new Dranken(item, db);
+            drankjesDG.Children.Add(eps);
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (dranken)drankenDG.SelectedItem;
+            drankjesDG.Children.Clear();
+            Dranken eps = new Dranken(item, db);
+            drankjesDG.Children.Add(eps);
+        }
+
+        private void btnZoek_Click(object sender, RoutedEventArgs e)
+        {
+            string sWaarde = txtZoek.Text;
+            var lijst = db.drankens.Where(p => Convert.ToString(p.ID).Contains(sWaarde));
+            drankenDG.ItemsSource = lijst;
+        }
+
+        private void terug_btn_Click(object sender, RoutedEventArgs e)
+        {
+            (this.Parent as Panel).Children.Remove(this);
         }
     }
 }

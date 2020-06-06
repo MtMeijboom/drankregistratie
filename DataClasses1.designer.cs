@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace drankregistratie
+namespace Drankregistratie3
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -36,7 +36,7 @@ namespace drankregistratie
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::drankregistratie.Properties.Settings.Default.restaurantdbConnectionString, mappingSource)
+				base(global::Drankregistratie3.Properties.Settings.Default.restaurantdbConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -87,10 +87,9 @@ namespace drankregistratie
 		private string _Soort;
 		
 		private System.Nullable<decimal> _Prijs;
-        internal static object Children;
-
-        #region Extensibility Method Definitions
-        partial void OnLoaded();
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnIDChanging(int value);
